@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from player import Player
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_WIDTH))
@@ -17,6 +18,8 @@ def main():
             if event.type == pygame.QUIT:
                 return
             
+        player.update(dt) #updates player's latest action
+
         screen.fill((0,153,153)) #can also use color directly. eg "black"
 
         player.draw(screen) #player appears on the interface
