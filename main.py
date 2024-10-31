@@ -1,5 +1,6 @@
 import pygame
 from constants import *
+from player import Player
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_WIDTH))
@@ -7,6 +8,7 @@ def main():
     # limit how many frames we draw per second (FPS) using the .tick() method
     # track how much time has passed between frames (delta time)
 
+    player = Player( SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_RADIUS)
     dt = 0 # dt represent the amount of time that has passed since the last frame was drawn
 
 
@@ -16,6 +18,9 @@ def main():
                 return
             
         screen.fill((0,153,153)) #can also use color directly. eg "black"
+
+        player.draw(screen) #player appears on the interface
+
         pygame.display.flip()   #use pygame function directly to clear the screen. it will know which screen to reset
 
         clock.tick(60) #will pause the game loop until 1/60th of a second has passed
