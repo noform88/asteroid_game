@@ -37,6 +37,13 @@ def main():
                 print("Game over!")
                 sys.exit() #shuts game.
 
+        #collision check for asteroid vs bullet
+        for asteroid in asteroids: #iterate over each asteroid
+            for bullet in shots:  #for each asteroid, iterate for each shot fired
+                if bullet.collision(asteroid): #if that shot touched the asteroid, kill em both
+                    asteroid.kill()
+                    bullet.kill()
+
         screen.fill((0,153,153)) 
 
         for obj in drawable: 
