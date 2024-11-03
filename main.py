@@ -3,6 +3,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 import sys
 
 def main():
@@ -12,11 +13,13 @@ def main():
 
     updatable = pygame.sprite.Group() 
     drawable = pygame.sprite.Group()
-    asteroids = pygame.sprite.Group() #new group specifically for asteroids, for later use
+    asteroids = pygame.sprite.Group() 
+    shots = pygame.sprite.Group() # group for shots fired
 
-    Asteroid.containers = (updatable, drawable, asteroids) #all asteroids automatically added to these 3 groups at birth
-    AsteroidField.containers = (updatable) #astrofield only needs updating.
+    Asteroid.containers = (updatable, drawable, asteroids) 
+    AsteroidField.containers = (updatable) 
     Player.containers = (updatable, drawable) 
+    Shot.containers = (updatable, drawable, shots) #added container for Shot instances
 
     player = Player( SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_RADIUS)
     asteroidfield = AsteroidField() #initialize the field before the loop. loop just updates each cycle.
