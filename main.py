@@ -14,12 +14,12 @@ def main():
     updatable = pygame.sprite.Group() 
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group() 
-    shots = pygame.sprite.Group() # group for shots fired
+    shots = pygame.sprite.Group() 
 
     Asteroid.containers = (updatable, drawable, asteroids) 
     AsteroidField.containers = (updatable) 
     Player.containers = (updatable, drawable) 
-    Shot.containers = (updatable, drawable, shots) #added container for Shot instances
+    Shot.containers = (updatable, drawable, shots) 
 
     player = Player( SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_RADIUS)
     asteroidfield = AsteroidField() #initialize the field before the loop. loop just updates each cycle.
@@ -35,13 +35,13 @@ def main():
         for asteroid in asteroids:  #collisions checks after updating movements but b4 being drawn onto screen
             if asteroid.collision(player):
                 print("Game over!")
-                sys.exit() #shuts game.
+                sys.exit() 
 
         #collision check for asteroid vs bullet
-        for asteroid in asteroids: #iterate over each asteroid
-            for bullet in shots:  #for each asteroid, iterate for each shot fired
-                if bullet.collision(asteroid): #if that shot touched the asteroid, kill em both
-                    asteroid.kill()
+        for asteroid in asteroids: 
+            for bullet in shots:  
+                if bullet.collision(asteroid):
+                    asteroid.split()
                     bullet.kill()
 
         screen.fill((0,153,153)) 
