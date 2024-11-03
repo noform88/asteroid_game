@@ -11,6 +11,12 @@ class Player(CircleShape):
         #self.radius
         self.rotation = 0
 
+        #shoot_timer is considered a class variable. meaning it will affects all instances of this class
+        shoot_timer = 0
+        #instance tied variable, aka attribute
+        #only affects this instance's timer
+        self.shoot_timer = 0
+
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
@@ -38,7 +44,12 @@ class Player(CircleShape):
             self.move(-dt)
 
         if keys[pygame.K_SPACE]:
-            self.shoot()
+            if self.shoot_timer > 0:
+                self.shoot_timer -= dt #CD reduces after each update cycle
+            else:
+                self.shoot()
+                self.shoot_timer = PLAYER_SHOOT_COOLDOWN
+                
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
